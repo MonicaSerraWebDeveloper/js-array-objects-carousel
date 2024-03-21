@@ -30,7 +30,9 @@ main {
     height: 100vh;
     margin: 0 auto;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
 .carousel-container {
@@ -141,4 +143,41 @@ main {
 
 .arrow-up:hover, .arrow-down:hover {
     background-color: #fff;
+}
+
+/*-----------------------
+        MINIATURE
+-------------------------*/
+
+.miniature-container {
+    width: 900px;
+    height: 100px;
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.miniature {
+    width: calc(100% / 5);
+    height: 100%;
+    opacity: 0.5;
+    background-color: #000;
+    border-radius: 5px;
+}
+
+.miniature img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.miniature:hover {
+    opacity: 1;
+    border-radius: 5px;
+}
+
+.miniature.active {
+    opacity: 1;
 }
