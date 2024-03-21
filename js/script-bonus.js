@@ -80,7 +80,7 @@ images.forEach((element) => {
     // Dichiariamo la variabile con dentro il pezzo di html che poi andrà appeso
     let miniatureInDom = `
     <div class="miniature">
-        <img src="./${element.image}" alt="">
+        <img class="miniature-image" src="./${element.image}" alt="">
     </div>
     `
     // Appendiamo nel container giusto il nostro blocco 
@@ -97,8 +97,9 @@ selectImage[defaultImageActive].classList.add('active');
 const selectThumbnail = document.querySelectorAll('.thumbnail-image');
 selectThumbnail[defaultImageActive].classList.add('active')
 
-const selectMiniature = document.querySelectorAll('.miniature')
-selectMiniature[defaultImageActive].classList.add('active')
+const notActivetedMiniatureSelected = document.querySelectorAll('.miniature')
+notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
+
 
 // Chiamiamo il tag della freccia verso il basso
 const arrowNext = document.querySelector('.arrow-down');
@@ -109,6 +110,8 @@ arrowNext.addEventListener('click', function() {
     document.querySelector('.image.active').classList.remove('active'); 
     // Facciamo la stessa cosa con la Thumbnail affinché anche la Thumbnail segua lo stesso indice 
     document.querySelector('.thumbnail-image.active').classList.remove('active')
+    document.querySelector('.miniature.active').classList.remove('active')
+
 
     // Incrementiamo l'indice che abbiamo dichiarato fuori
 
@@ -123,7 +126,9 @@ arrowNext.addEventListener('click', function() {
 
     selectImage[defaultImageActive].classList.add('active');
     selectThumbnail[defaultImageActive].classList.add('active')
+    notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
 });
+
 
 // Chiamiamo il tag della freccia verso l'alto
 const arrowPrevious = document.querySelector('.arrow-up')
@@ -132,6 +137,7 @@ arrowPrevious.addEventListener('click', function() {
 
     document.querySelector('.image.active').classList.remove('active'); 
     document.querySelector('.thumbnail-image.active').classList.remove('active')
+    document.querySelector('.miniature.active').classList.remove('active')
 
     // Decrementiamo il numero dell'indice 
     
@@ -146,4 +152,27 @@ arrowPrevious.addEventListener('click', function() {
     
     selectImage[defaultImageActive].classList.add('active');
     selectThumbnail[defaultImageActive].classList.add('active')
+    notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
 })
+
+
+notActivetedMiniatureSelected.forEach((element, index) => {
+    if (element.classList.contains('miniature')) {
+        console.log(element);
+        element.addEventListener('click', function() {
+
+            document.querySelector('.image.active').classList.remove('active'); 
+            document.querySelector('.thumbnail-image.active').classList.remove('active')
+            document.querySelector('.miniature.active').classList.remove('active')
+            
+            defaultImageActive = index;
+
+            selectImage[defaultImageActive].classList.add('active');
+            selectThumbnail[defaultImageActive].classList.add('active')
+            element.classList.add('active')
+
+        })
+    }
+});
+
+
