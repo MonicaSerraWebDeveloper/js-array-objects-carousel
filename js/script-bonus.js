@@ -42,9 +42,12 @@ let defaultImageActive = 0;
 
 const thumbnailSideContainer = document.querySelector('.right-images-container');
 const imageCurrent = document.querySelector('.left-image-container')
+const miniatureContainer = document.querySelector('.miniature-container')
 
 // Usiamo il ForEach per richiamare i singoli oggetti all'interno dell'Array
 images.forEach((element) => {
+
+    // IMMAGINE SELEZIONATA GRANDE
     // Creiamo la variabile per creare la parte di html che andremo ad appendere nel DOM usando i literal template
     let selectImage = `
     <div class="image">
@@ -62,6 +65,7 @@ images.forEach((element) => {
     // Andiamo ad appendere nel DOM la parte di HTML appena creata
     imageCurrent.innerHTML += selectImage
 
+    // THUMBNAIL A DESTRA
     // Creiamo la variabile per creare la parte di html che andremo ad appendere nel DOM usando i literal template questa volta per la parte destra delle thumbnail
     let thumbnailImages = `
     <div class="thumbnail-image">
@@ -71,6 +75,17 @@ images.forEach((element) => {
 
     // Andiamo ad appendere nel DOM la parte di HTML appena creata
     thumbnailSideContainer.innerHTML += thumbnailImages
+
+    // MINIATURE IN BASSO
+    // Dichiariamo la variabile con dentro il pezzo di html che poi andrà appeso
+    let miniatureInDom = `
+    <div class="miniature">
+        <img src="./${element.image}" alt="">
+    </div>
+    `
+    // Appendiamo nel container giusto il nostro blocco 
+    miniatureContainer.innerHTML += miniatureInDom
+
 });
 
 // Vogliamo che di default sia la prima immagine ad essere attiva
@@ -81,6 +96,9 @@ selectImage[defaultImageActive].classList.add('active');
 
 const selectThumbnail = document.querySelectorAll('.thumbnail-image');
 selectThumbnail[defaultImageActive].classList.add('active')
+
+const selectMiniature = document.querySelectorAll('.miniature')
+selectMiniature[defaultImageActive].classList.add('active')
 
 // Chiamiamo il tag della freccia verso il basso
 const arrowNext = document.querySelector('.arrow-down');
