@@ -153,9 +153,7 @@ notActivetedMiniatureSelected.forEach((element, index) => {
             
             defaultImageActive = index;
 
-            selectImage[defaultImageActive].classList.add('active');
-            selectThumbnail[defaultImageActive].classList.add('active')
-            element.classList.add('active')
+            activetedElements (selectImage, selectThumbnail, notActivetedMiniatureSelected)
 
         })
     }
