@@ -159,7 +159,6 @@ arrowPrevious.addEventListener('click', function() {
 
 notActivetedMiniatureSelected.forEach((element, index) => {
     if (element.classList.contains('miniature')) {
-        console.log(element);
         element.addEventListener('click', function() {
 
             document.querySelector('.image.active').classList.remove('active'); 
@@ -178,25 +177,41 @@ notActivetedMiniatureSelected.forEach((element, index) => {
 
 // BONUS 2: Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
 
-setTimeout (function() {
+// BONUS 3: Aggiungere bottoni di start/stop e di inversione del meccanismo di autoplay.
+const startAutoplay = document.querySelector('.start-autoplay');
+const stopAutoplay = document.querySelector('.stop-autoplay');
 
-    setInterval(function() {
+let autoplayCarousel;
 
-        document.querySelector('.image.active').classList.remove('active'); 
-        document.querySelector('.thumbnail-image.active').classList.remove('active')
-        document.querySelector('.miniature.active').classList.remove('active')
+startAutoplay.addEventListener('click', function() {
+    setTimeout (function() {
 
-        if (defaultImageActive < selectImage.length - 1) {
-            defaultImageActive++
-        } else {
-            defaultImageActive = 0
-        }
+       autoplayCarousel = setInterval(function() {
 
-        selectImage[defaultImageActive].classList.add('active');
-        selectThumbnail[defaultImageActive].classList.add('active')
-        notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
-    }, 2000)
+            document.querySelector('.image.active').classList.remove('active'); 
+            document.querySelector('.thumbnail-image.active').classList.remove('active')
+            document.querySelector('.miniature.active').classList.remove('active')
 
-}, 3000)
+            if (defaultImageActive < selectImage.length - 1) {
+                defaultImageActive++
+            } else {
+                defaultImageActive = 0
+            }
+
+            selectImage[defaultImageActive].classList.add('active');
+            selectThumbnail[defaultImageActive].classList.add('active')
+            notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
+        }, 2000)
+
+    }, 1000)
+});
+
+stopAutoplay.addEventListener('click', function() {
+    clearInterval (autoplayCarousel);
+});
+
+
+
+
 
 
