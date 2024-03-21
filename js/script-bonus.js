@@ -107,11 +107,7 @@ const arrowNext = document.querySelector('.arrow-down');
 // Ad ogni click vogliamo che la classe active venga rimossa dall'immagine di default e inserita al successivo, considerando che la variabile defaultImageActive si occupa di modificare l'indice, dunque bisogna incrementarlo ad ogni click
 arrowNext.addEventListener('click', function() {
     // Andiamo a selezionare l'elemento HTML che in quel momento ha entrambe le classi ed è quindi specifica l'elemento attivo in quel momento
-    document.querySelector('.image.active').classList.remove('active'); 
-    // Facciamo la stessa cosa con la Thumbnail affinché anche la Thumbnail segua lo stesso indice 
-    document.querySelector('.thumbnail-image.active').classList.remove('active')
-    document.querySelector('.miniature.active').classList.remove('active')
-
+    removeElements ('.image.active', '.thumbnail-image.active', '.miniature.active')
 
     // Incrementiamo l'indice che abbiamo dichiarato fuori
 
@@ -124,9 +120,7 @@ arrowNext.addEventListener('click', function() {
         defaultImageActive = 0
     }
 
-    selectImage[defaultImageActive].classList.add('active');
-    selectThumbnail[defaultImageActive].classList.add('active')
-    notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
+    activetedElements (selectImage, selectThumbnail, notActivetedMiniatureSelected)
 });
 
 
@@ -135,14 +129,9 @@ const arrowPrevious = document.querySelector('.arrow-up')
 
 arrowPrevious.addEventListener('click', function() {
 
-    document.querySelector('.image.active').classList.remove('active'); 
-    document.querySelector('.thumbnail-image.active').classList.remove('active')
-    document.querySelector('.miniature.active').classList.remove('active')
+    removeElements ('.image.active', '.thumbnail-image.active', '.miniature.active')
 
-    // Decrementiamo il numero dell'indice 
-    
-    // Milestone 2:
-    // Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso l'alto, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso il basso.
+    // Decrementiamo il numero dell'indice
 
     if (defaultImageActive > 0) {
         defaultImageActive--
@@ -150,9 +139,8 @@ arrowPrevious.addEventListener('click', function() {
         defaultImageActive = selectImage.length -1
     }
     
-    selectImage[defaultImageActive].classList.add('active');
-    selectThumbnail[defaultImageActive].classList.add('active')
-    notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
+    activetedElements (selectImage, selectThumbnail, notActivetedMiniatureSelected)
+
 })
 
 // BONUS 1: Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
@@ -161,9 +149,7 @@ notActivetedMiniatureSelected.forEach((element, index) => {
     if (element.classList.contains('miniature')) {
         element.addEventListener('click', function() {
 
-            document.querySelector('.image.active').classList.remove('active'); 
-            document.querySelector('.thumbnail-image.active').classList.remove('active')
-            document.querySelector('.miniature.active').classList.remove('active')
+            removeElements ('.image.active', '.thumbnail-image.active', '.miniature.active')
             
             defaultImageActive = index;
 
@@ -184,34 +170,47 @@ const stopAutoplay = document.querySelector('.stop-autoplay');
 let autoplayCarousel;
 
 startAutoplay.addEventListener('click', function() {
+    this.classList.add('button-clicked')
+    stopAutoplay.classList.remove('button-clicked')
     setTimeout (function() {
 
        autoplayCarousel = setInterval(function() {
 
-            document.querySelector('.image.active').classList.remove('active'); 
-            document.querySelector('.thumbnail-image.active').classList.remove('active')
-            document.querySelector('.miniature.active').classList.remove('active')
+        removeElements ('.image.active', '.thumbnail-image.active', '.miniature.active')
 
-            if (defaultImageActive < selectImage.length - 1) {
-                defaultImageActive++
-            } else {
-                defaultImageActive = 0
-            }
+        if (defaultImageActive < selectImage.length - 1) {
+            defaultImageActive++
+        } else {
+            defaultImageActive = 0
+        }
 
-            selectImage[defaultImageActive].classList.add('active');
-            selectThumbnail[defaultImageActive].classList.add('active')
-            notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
+        activetedElements (selectImage, selectThumbnail, notActivetedMiniatureSelected)
+
         }, 2000)
 
     }, 1000)
 });
 
 stopAutoplay.addEventListener('click', function() {
+    this.classList.add('button-clicked')
+    startAutoplay.classList.remove('button-clicked')
     clearInterval (autoplayCarousel);
 });
 
 
+// FUNCTIONS
 
+// Funzione per rimuovere la classe "active" da ogni singolo elemento
 
+function removeElements (image, thumbnail, miniature) {
+    document.querySelector(image).classList.remove('active'); 
+    document.querySelector(thumbnail).classList.remove('active')
+    document.querySelector(miniature).classList.remove('active')
+}
 
-
+// Funzione per aggiungere la classe "active" ad ogni singolo elemento
+function activetedElements (image, thumbnail, miniature) {
+    image[defaultImageActive].classList.add('active');
+    thumbnail[defaultImageActive].classList.add('active')
+    miniature[defaultImageActive].classList.add('active')
+}
