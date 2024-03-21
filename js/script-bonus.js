@@ -155,6 +155,7 @@ arrowPrevious.addEventListener('click', function() {
     notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
 })
 
+// BONUS 1: Aggiungere le thumbnails (sottoforma di miniatura) ed al click attivare l’immagine corrispondente.
 
 notActivetedMiniatureSelected.forEach((element, index) => {
     if (element.classList.contains('miniature')) {
@@ -174,5 +175,28 @@ notActivetedMiniatureSelected.forEach((element, index) => {
         })
     }
 });
+
+// BONUS 2: Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva.
+
+setTimeout (function() {
+
+    setInterval(function() {
+
+        document.querySelector('.image.active').classList.remove('active'); 
+        document.querySelector('.thumbnail-image.active').classList.remove('active')
+        document.querySelector('.miniature.active').classList.remove('active')
+
+        if (defaultImageActive < selectImage.length - 1) {
+            defaultImageActive++
+        } else {
+            defaultImageActive = 0
+        }
+
+        selectImage[defaultImageActive].classList.add('active');
+        selectThumbnail[defaultImageActive].classList.add('active')
+        notActivetedMiniatureSelected[defaultImageActive].classList.add('active')
+    }, 2000)
+
+}, 3000)
 
 
