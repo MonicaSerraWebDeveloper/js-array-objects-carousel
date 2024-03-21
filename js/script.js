@@ -32,3 +32,45 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
+// Milestone 1:
+// Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
+
+// Andiamo a popolare il lato destro della thumbnail inserendo le immagini all'interno del DOM
+
+const thumbnailSideContainer = document.querySelector('.right-images-container');
+const imageCurrent = document.querySelector('.left-image-container')
+
+// Usiamo il ForEach per richiamare i singoli oggetti all'interno dell'Array
+images.forEach((element) => {
+    // Creiamo la variabile per creare la parte di html che andremo ad appendere nel DOM usando i literal template
+    let selectImage = `
+    <div class="image">
+                    <img src="./${element.image}" alt="">
+                </div> 
+                <div class="text-movie-container">
+                    <h3>
+                        ${element.title}
+                    </h3>
+                    <p>
+                        ${element.text}
+                    </p>
+                </div>
+    `
+    // Andiamo ad appendere nel DOM la parte di HTML appena creata
+    imageCurrent.innerHTML += selectImage
+
+    // Creiamo la variabile per creare la parte di html che andremo ad appendere nel DOM usando i literal template questa volta per la parte destra delle thumbnail
+    let thumbnailImages = `
+    <div class="thumbnail-image">
+        <img src="./${element.image}" alt="">
+    </div>
+    `
+
+    // Andiamo ad appendere nel DOM la parte di HTML appena creata
+    thumbnailSideContainer.innerHTML += thumbnailImages
+});
+
+
+
+
