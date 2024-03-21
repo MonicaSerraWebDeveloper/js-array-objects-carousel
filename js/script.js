@@ -82,21 +82,42 @@ selectImage[defaultImageActive].classList.add('active');
 const selectThumbnail = document.querySelectorAll('.thumbnail-image');
 selectThumbnail[defaultImageActive].classList.add('active')
 
+// Chiamiamo il tag della freccia verso il basso
 const arrowNext = document.querySelector('.arrow-down');
 
 // Ad ogni click vogliamo che la classe active venga rimossa dall'immagine di default e inserita al successivo, considerando che la variabile defaultImageActive si occupa di modificare l'indice, dunque bisogna incrementarlo ad ogni click
 arrowNext.addEventListener('click', function() {
     // Andiamo a selezionare l'elemento HTML che in quel momento ha entrambe le classi ed è quindi specifica l'elemento attivo in quel momento
     document.querySelector('.image.active').classList.remove('active'); 
-    console.log(selectImage);
-    selectImage[defaultImageActive].classList.add('active');
     // Facciamo la stessa cosa con la Thumbnail affinché anche la Thumbnail segua lo stesso indice 
     document.querySelector('.thumbnail-image.active').classList.remove('active')
-    selectThumbnail[defaultImageActive].classList.add('active')
+
     // Incrementiamo l'indice che abbiamo dichiarato fuori
     defaultImageActive++
 
+    selectImage[defaultImageActive].classList.add('active');
+    selectThumbnail[defaultImageActive].classList.add('active')
+
+
 });
+
+// Chiamiamo il tag della freccia verso l'alto
+const arrowPrevious = document.querySelector('.arrow-up')
+
+arrowPrevious.addEventListener('click', function() {
+
+    document.querySelector('.image.active').classList.remove('active'); 
+    document.querySelector('.thumbnail-image.active').classList.remove('active')
+
+    // Decrementiamo il numero dell'indice 
+    defaultImageActive--
+
+    selectImage[defaultImageActive].classList.add('active');
+    selectThumbnail[defaultImageActive].classList.add('active')
+
+
+})
+
 
 
 // Milestone 2:
