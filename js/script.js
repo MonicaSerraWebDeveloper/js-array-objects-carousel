@@ -38,6 +38,8 @@ const images = [
 
 // Andiamo a popolare il lato destro della thumbnail inserendo le immagini all'interno del DOM
 
+let defaultImageActive = 0;
+
 const thumbnailSideContainer = document.querySelector('.right-images-container');
 const imageCurrent = document.querySelector('.left-image-container')
 
@@ -46,16 +48,16 @@ images.forEach((element) => {
     // Creiamo la variabile per creare la parte di html che andremo ad appendere nel DOM usando i literal template
     let selectImage = `
     <div class="image">
-                    <img src="./${element.image}" alt="">
-                </div> 
-                <div class="text-movie-container">
-                    <h3>
-                        ${element.title}
-                    </h3>
-                    <p>
-                        ${element.text}
-                    </p>
-                </div>
+        <img src="./${element.image}" alt="">
+        <div class="text-movie-container">
+            <h3>
+                ${element.title}
+            </h3>
+            <p>
+                ${element.text}
+            </p>
+        </div>
+    </div>
     `
     // Andiamo ad appendere nel DOM la parte di HTML appena creata
     imageCurrent.innerHTML += selectImage
@@ -72,5 +74,33 @@ images.forEach((element) => {
 });
 
 
+// Al click dell'utente sulle frecce verso alto o basso, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
+
+const selectImage = document.querySelectorAll('.image'); // Si comporta come un array
+selectImage[defaultImageActive].classList.add('active');
+
+const selectThumbnail = document.querySelectorAll('.thumbnail-image');
+selectThumbnail[defaultImageActive].classList.add('active')
+
+const arrowNext = document.querySelector('.arrow-down');
+
+// Ad ogni click vogliamo che la classe active venga rimossa dall'immagine di default e inserita al successivo, considerando che la variabile defaultImageActive si occupa di modificare l'indice, dunque bisogna incrementarlo ad ogni click
+arrowNext.addEventListener('click', function() {
+    // Andiamo a selezionare l'elemento HTML che in quel momento ha entrambe le classi ed è quindi specifica l'elemento attivo in quel momento
+    document.querySelector('.image.active').classList.remove('active'); 
+    console.log(selectImage);
+    selectImage[defaultImageActive].classList.add('active');
+    // Facciamo la stessa cosa con la Thumbnail affinché anche la Thumbnail segua lo stesso indice 
+    document.querySelector('.thumbnail-image.active').classList.remove('active')
+    selectThumbnail[defaultImageActive].classList.add('active')
+    // Incrementiamo l'indice che abbiamo dichiarato fuori
+    defaultImageActive++
+
+});
 
 
+// Milestone 2:
+// Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso l'alto, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso il basso.
+
+// Vogliamo che di default sia la prima immagine ad essere attiva
+// Impostiamo di default la classe "active" per mostrarla al caricamento

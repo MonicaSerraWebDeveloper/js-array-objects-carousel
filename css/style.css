@@ -57,11 +57,11 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0;
+    display: none;
 }
 
-.active {
-    opacity: 1;
+.image.active {
+    display: block;
 }
 
 .image img {
@@ -94,6 +94,11 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.thumbnail-image.active {
+    opacity: 1;
+    border: 2px solid #fff;
 }
 
 .thumbnail-image:hover {
