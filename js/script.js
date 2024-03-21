@@ -73,8 +73,8 @@ images.forEach((element) => {
     thumbnailSideContainer.innerHTML += thumbnailImages
 });
 
-
-// Al click dell'utente sulle frecce verso alto o basso, l'immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo.
+// Vogliamo che di default sia la prima immagine ad essere attiva
+// Impostiamo di default la classe "active" per mostrarla al caricamento
 
 const selectImage = document.querySelectorAll('.image'); // Si comporta come un array
 selectImage[defaultImageActive].classList.add('active');
@@ -93,12 +93,18 @@ arrowNext.addEventListener('click', function() {
     document.querySelector('.thumbnail-image.active').classList.remove('active')
 
     // Incrementiamo l'indice che abbiamo dichiarato fuori
-    defaultImageActive++
+
+    // Milestone 2:
+    // Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso l'alto, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso il basso.
+
+    if (defaultImageActive < selectImage.length - 1) {
+        defaultImageActive++
+    } else {
+        defaultImageActive = 0
+    }
 
     selectImage[defaultImageActive].classList.add('active');
     selectThumbnail[defaultImageActive].classList.add('active')
-
-
 });
 
 // Chiamiamo il tag della freccia verso l'alto
@@ -110,18 +116,18 @@ arrowPrevious.addEventListener('click', function() {
     document.querySelector('.thumbnail-image.active').classList.remove('active')
 
     // Decrementiamo il numero dell'indice 
-    defaultImageActive--
+    
+    // Milestone 2:
+    // Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso l'alto, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso il basso.
+
+    if (defaultImageActive > 0) {
+        defaultImageActive--
+    } else {
+        defaultImageActive = selectImage.length -1
+    }
+    
+    console.log(defaultImageActive);
 
     selectImage[defaultImageActive].classList.add('active');
     selectThumbnail[defaultImageActive].classList.add('active')
-
-
 })
-
-
-
-// Milestone 2:
-// Aggiungere il **ciclo infinito** del carosello. Ovvero se la miniatura attiva è la prima e l'utente clicca la freccia verso l'alto, la miniatura che deve attivarsi sarà l'ultima e viceversa per l'ultima miniatura se l'utente clicca la freccia verso il basso.
-
-// Vogliamo che di default sia la prima immagine ad essere attiva
-// Impostiamo di default la classe "active" per mostrarla al caricamento
