@@ -126,8 +126,6 @@ arrowPrevious.addEventListener('click', function() {
         defaultImageActive = selectImage.length -1
     }
     
-    console.log(defaultImageActive);
-
     selectImage[defaultImageActive].classList.add('active');
     selectThumbnail[defaultImageActive].classList.add('active')
 })
