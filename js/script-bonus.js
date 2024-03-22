@@ -170,9 +170,8 @@ let autoplayCarousel;
 startAutoplay.addEventListener('click', function() {
     this.classList.add('button-clicked')
     stopAutoplay.classList.remove('button-clicked')
-    setTimeout (function() {
 
-       autoplayCarousel = setInterval(function() {
+    autoplayCarousel = setInterval(function() {
 
         removeElements ('.image.active', '.thumbnail-image.active', '.miniature.active')
 
@@ -184,9 +183,7 @@ startAutoplay.addEventListener('click', function() {
 
         activetedElements (selectImage, selectThumbnail, notActivetedMiniatureSelected)
 
-        }, 2000)
-
-    }, 1000)
+    }, 2000)
 });
 
 stopAutoplay.addEventListener('click', function() {
@@ -197,7 +194,6 @@ stopAutoplay.addEventListener('click', function() {
 
 
 // FUNCTIONS
-
 // Funzione per rimuovere la classe "active" da ogni singolo elemento
 
 function removeElements (image, thumbnail, miniature) {
